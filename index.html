@@ -14,7 +14,7 @@
         form {
             margin: 20px;
         }
-        label, input, select, input[type=submit] {
+        label, input, select, input[type=submit], #result {
             font-size: 16px;
             margin: 10px 0;
         }
@@ -25,6 +25,12 @@
             padding: 10px 20px;
             font-size: 18px;
             cursor: pointer;
+        }
+        #result {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 18px;
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -103,9 +109,8 @@
         </select><br>
 
         <input type="submit" value="Calculate Probability">
+        <span id="result"></span>
     </form>
-
-    <div id="result"></div>
 
     <script>
         document.getElementById('candidateForm').addEventListener('submit', function(event) {
