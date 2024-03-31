@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Are you a Potential Program Candidate? </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Are you a Potential Program Candidate?</h1>
+    <form id="candidateForm">
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" name="height" required><br><br>
+
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" name="weight" required><br><br>
+
+        <label for="eyeColor">Eye Color:</label>
+        <select id="eyeColor" name="eyeColor" required>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+            <option value="brown">Brown</option>
+            <option value="other">Other</option>
+        </select><br><br>
+
+        <label for="iq">IQ:</label>
+        <input type="number" id="iq" name="iq" required><br><br>
+
+        <label for="talent">Do you have a talent? (e.g., musical, artistic):</label>
+        <select id="talent" name="talent" required>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select><br><br>
+
+        <label for="exercise">Do you exercise at least 5 times a week?</label>
+        <select id="exercise" name="exercise" required>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select><br><br>
+
+        <label for="protein">Daily Protein Intake (grams):</label>
+        <input type="number" id="protein" name="protein" required><br><br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select><br><br>
+
+        <label for="education">Education Level:</label>
+        <select id="education" name="education" required>
+            <option value="high_school">High School</option>
+            <option value="bachelor">Bachelor's Degree</option>
+            <option value="master">Master's Degree</option>
+            <option value="phd">PhD</option>
+        </select><br><br>
+
+        <label for="mentalIllness">Do you have a mental illness?</label>
+        <select id="mentalIllness" name="mentalIllness" required>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select><br><br>
+
+        <label for="familyCancer">Do you have a family history of cancer?</label>
+        <select id="familyCancer" name="familyCancer" required>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select><br><br>
+
+        <label for="lowDays">Do you have at least one day a week when you feel down?</label>
+        <select id="lowDays" name="lowDays" required>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select><br><br>
+
+        <label for="weightControl">Have you ever had uncontrolled weight?</label>
+        <select id="weightControl" name="weightControl" required>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select><br><br>
+
+        <input type="submit" value="Calculate Probability">
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('candidateForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get form values
+            var height = parseInt(document.getElementById('height').value);
+            var weight = parseInt(document.getElementById('weight').value);
+            var eyeColor = document.getElementById('eyeColor').value;
+            var iq = parseInt(document.getElementById('iq').value);
+            var talent = document.getElementById('talent').value;
+            var exercise = document.getElementById('exercise').value;
+            var protein = parseInt(document.getElementById('protein').value);
+            var gender = document.getElementById('gender').value;
+            var education = document.getElementById('education').value;
+            var mentalIllness = document.getElementById('mentalIllness').value;
+            var familyCancer = document.getElementById('familyCancer').value;
+            var lowDays = document.getElementById('lowDays').value;
+            var weightControl = document.getElementById('weightControl').value;
+
+            // Calculate probability
+            var probability = 0;
+            probability += (height > 170) ? 10 : 5;
+            probability += (weight >= 50 && weight <= 80) ? 10 : 5;
+            probability += (eyeColor === 'blue' || eyeColor === 'green') ? 10 : 5;
+            probability += (iq > 120) ? 20 : 10;
+            probability += (talent === 'yes') ? 15 : 0;
+            probability += (exercise === 'yes') ? 20 : 0;
+            probability += (protein >= 50) ? 15 : 5;
+            probability += (gender === 'male') ? 5 : (gender === 'female') ? 10 : 0;
+            probability += (education === 'phd') ? 15 : (education === 'master') ? 10 : (education === 'bachelor') ? 5 : 0;
+            probability -= (mentalIllness === 'yes') ? 10 : 0;
+            probability -= (familyCancer === 'yes') ? 10 : 0;
+            probability -= (lowDays === 'yes') ? 5 : 0;
+            probability -= (weightControl === 'yes') ? 5 : 0;
+
+            // Ensure probability is within 0-100%
+            probability = Math.max(0, Math.min(100, probability));
+
+            // Display result
+            document.getElementById('result').innerHTML = 'Your probability of becoming a program candidate is ' + probability + '%.';
+        });
+    </script>
+</body>
+</html>
